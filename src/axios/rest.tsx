@@ -2,8 +2,12 @@ import axios from './api'
 
 async function resData(url:string){
     try{
-        const res = await axios.get(url)
-        return res.data
+        const res = await axios.get(url,{
+            headers:{
+                Authorization:`Bearer ${localStorage.getItem('auth')}`
+            }
+        })
+        return res
     }catch(err:any){
         console.log(err)
     }

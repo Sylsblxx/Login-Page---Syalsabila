@@ -6,9 +6,12 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import * as Comp from "../../components/share/share.component";
 import { loginPost } from "../../services/user.service";
+import { useNavigate } from "react-router-dom";
 
 function LoginPage() {
-    const initValue: LoginReq = { userName: '', password: '' }
+    const initValue: LoginReq = { userName: '', password: '', parameters:{clientId:11, roleId:102, organizationId:11, warehouseId:103, language:'en_US'} }
+
+    const navigate = useNavigate()
     const userSchema = Yup.object().shape({
         userName: Yup.string()
             .min(3, 'Too Short!')
@@ -25,7 +28,10 @@ function LoginPage() {
         initialValues: initValue,
         onSubmit: (values) => {
             console.log(values)
-            loginPost(values)
+            loginPost(values).then(res=>{
+                navigate("/asset")
+            })
+            
         },
         validationSchema: userSchema
     })
@@ -49,43 +55,43 @@ function LoginPage() {
                 </div> 
                 =======================================================
                 */}
-            
-            <div className="grid grid-nogutter justify-content-center mt-5">
-                <div className="col-10">
-                    <div className="card">
-                        <div className="flex flex-column md:flex-row">
-                            <div className="w-full md:w-5 flex flex-column align-items-s justify-content-center gap-3 py-5">
-                                <div className="flex flex-wrap justify-content-center align-items-center gap-2">
-                                    <label htmlFor="username" className="w-6rem">
-                                        Username
-                                    </label>
-                                    <MyInputText type="text" name="userName" id="userName"
-                                        formik={userForm} />
+
+                <div className="grid grid-nogutter justify-content-center mt-5">
+                    <div className="col-10">
+                        <Comp.Card>
+                            <div className="flex flex-column md:flex-row">
+                                <div className="w-full md:w-5 flex flex-column align-items-s justify-content-center gap-3 py-5">
+                                    <div className="flex flex-wrap justify-content-center align-items-center gap-2">
+                                        <label htmlFor="username" className="w-6rem">
+                                            Username
+                                        </label>
+                                        <MyInputText type="text" name="userName" id="userName"
+                                            formik={userForm} />
+                                    </div>
+                                    <div className="flex flex-wrap justify-content-center align-items-center gap-2">
+                                        <label htmlFor="password" className="w-6rem">
+                                            Password
+                                        </label>
+                                        <MyInputText type="password" name="password" id="password"
+                                            formik={userForm} />
+                                    </div>
+                                    <Comp.Button type="submit" label="LOGIN" />
                                 </div>
-                                <div className="flex flex-wrap justify-content-center align-items-center gap-2">
-                                    <label htmlFor="password" className="w-6rem">
-                                        Password
-                                    </label>
-                                    <MyInputText type="password" name="password" id="password"
-                                        formik={userForm} />
+                                <div className="w-full md:w-2">
+                                    <Comp.Divider layout="vertical" className="hidden md:flex">
+                                        <b>OR</b>
+                                    </Comp.Divider>
+                                    <Comp.Divider layout="horizontal" className="flex md:hidden" align="center">
+                                        <b>OR</b>
+                                    </Comp.Divider>
                                 </div>
-                                <Comp.Button type="submit" label="LOGIN" />
+                                <div className="w-full md:w-5 flex align-items-center justify-content-center py-5">
+                                    <Comp.Button label="Sign Up" icon="pi pi-user-plus" className="p-button-success"></Comp.Button>
+                                </div>
                             </div>
-                            <div className="w-full md:w-2">
-                                <Comp.Divider layout="vertical" className="hidden md:flex">
-                                    <b>OR</b>
-                                </Comp.Divider>
-                                <Comp.Divider layout="horizontal" className="flex md:hidden" align="center">
-                                    <b>OR</b>
-                                </Comp.Divider>
-                            </div>
-                            <div className="w-full md:w-5 flex align-items-center justify-content-center py-5">
-                                <Comp.Button label="Sign Up" icon="pi pi-user-plus" className="p-button-success"></Comp.Button>
-                            </div>
-                        </div>
+                        </Comp.Card>
                     </div>
                 </div>
-            </div>
             </form>
 
         </div>
