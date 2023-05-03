@@ -5,7 +5,7 @@ export interface LoginReq{
         clientId: number,
         roleId: number,
         organizationId: number,
-        warehouseId:number,
+        warehouseId:string,
         language:string
     }
 }

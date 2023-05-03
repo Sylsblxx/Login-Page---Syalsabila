@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import * as Comp from "../../components/share/share.component";
 import { AssetRes } from "../../dto/asset/asset-res";
 import { getAsset } from "../../services/asset.service";
+import { Link } from "react-router-dom";
 
 
 function AssetPage() {
@@ -34,11 +35,11 @@ function AssetPage() {
             <div className="grid grid-nogutter justify-content-center mt-5">
                 <div className="card flex flex-column md:flex-row gap-3">
                     <div className="col">
-                        {/* <ul>
-                            {assets.map((a,i)=>
-                            <li key={i}>{a.Name}</li>
-                            )}
-                        </ul> */}
+                        <div className="m-3">
+                            <Link to="/asset/create">
+                            <Comp.Button label="Create Asset" />
+                            </Link>
+                        </div>
                         <Comp.DataTable value={assets} tableStyle={{ minWidth: '50rem' }}>
                             <Comp.Column field="AD_Client_ID.identifier" header="Organization"></Comp.Column>
                             <Comp.Column field="InventoryNo" header="Inventory No"></Comp.Column>
@@ -46,7 +47,7 @@ function AssetPage() {
                             <Comp.Column field="A_AssetType" header="Asset Type"></Comp.Column>
                             <Comp.Column field="Name" header="Asset"></Comp.Column>
                         </Comp.DataTable>
-                        
+
                         {/* {assets.map((a,i)=>
                         <table>
                             <tr>

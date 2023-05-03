@@ -9,7 +9,7 @@ import { loginPost } from "../../services/user.service";
 import { useNavigate } from "react-router-dom";
 
 function LoginPage() {
-    const initValue: LoginReq = { userName: '', password: '', parameters:{clientId:11, roleId:102, organizationId:11, warehouseId:103, language:'en_US'} }
+    const initValue: LoginReq = { userName: '', password: '', parameters:{clientId:11, roleId:102, organizationId:11, warehouseId:'', language:'en_US'} }
 
     const navigate = useNavigate()
     const userSchema = Yup.object().shape({
@@ -59,7 +59,7 @@ function LoginPage() {
                 <div className="grid grid-nogutter justify-content-center mt-5">
                     <div className="col-10">
                         <Comp.Card>
-                            <div className="flex flex-column md:flex-row">
+                            <div className="flex flex-column md:flex-row justify-content-center">
                                 <div className="w-full md:w-5 flex flex-column align-items-s justify-content-center gap-3 py-5">
                                     <div className="flex flex-wrap justify-content-center align-items-center gap-2">
                                         <label htmlFor="username" className="w-6rem">
@@ -77,7 +77,7 @@ function LoginPage() {
                                     </div>
                                     <Comp.Button type="submit" label="LOGIN" />
                                 </div>
-                                <div className="w-full md:w-2">
+                                {/* <div className="w-full md:w-2">
                                     <Comp.Divider layout="vertical" className="hidden md:flex">
                                         <b>OR</b>
                                     </Comp.Divider>
@@ -87,7 +87,7 @@ function LoginPage() {
                                 </div>
                                 <div className="w-full md:w-5 flex align-items-center justify-content-center py-5">
                                     <Comp.Button label="Sign Up" icon="pi pi-user-plus" className="p-button-success"></Comp.Button>
-                                </div>
+                                </div> */}
                             </div>
                         </Comp.Card>
                     </div>
